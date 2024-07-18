@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RegistrationApi.DBModel;
+using RegistrationApi.Repository;
 
 
 namespace RegistrationApi.Controllers
@@ -10,19 +11,19 @@ namespace RegistrationApi.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly MyAppDbContext _context;
+        private readonly IUserRepository _context;
 
-        public UserController(MyAppDbContext _context)
+        public UserController(IUserRepository context)
         {
-            this._context = _context;
+            _context = context;
         }
         [HttpGet]
-        [Route("Getuser")]
-        public IActionResult getuser()
+        [Route("Getusers")]
+        public IActionResult Getusers()
         {
             try
             {
-                var users = _context.Userinfos.ToList();
+                var users = _context.GetAllUsers();
 
                 // check for null values in properties before returning
                 var userswithoutnulls = users.Select(u => new
@@ -53,13 +54,13 @@ namespace RegistrationApi.Controllers
                 }
 
                 // Retrieve the maximum UserId from the database
-                var maxUserId = _context.Userinfos.Max(u => (int?)u.UserId) ?? 0; // Assuming UserId is int type
+                var maxUserId = _context.GetusermaxId();
 
                 // Increment maxUserId by 1 to generate a new UserId
                 var newUserId = maxUserId + 1;
 
                 // Check if username already exists
-                var objUser = _context.Userinfos.FirstOrDefault(x => x.Username == UserDto.Username && x.Password == UserDto.Password);
+                var objUser = _context.GetUserByUsernameAndPassword(UserDto.Username, UserDto.Password);
                 if (objUser != null)
                 {
                     return BadRequest("User already exists");
@@ -75,7 +76,7 @@ namespace RegistrationApi.Controllers
                 };
 
                 // Add user to DbContext and save changes
-                _context.Userinfos.Add(newUser);
+                _context.AddUser(newUser);  
                 _context.SaveChanges();
 
                 return Ok("User registered successfully");

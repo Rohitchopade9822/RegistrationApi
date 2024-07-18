@@ -4,9 +4,10 @@ namespace RegistrationApi.Repository
 {
     public interface IUserRepository
     {
+        IEnumerable<Userinfo> GetAllUsers();
         Userinfo GetUserByUsernameAndPassword(string username, string password);
-        void AddUser(Userinfo userinfo);
         int GetusermaxId();
+        void AddUser(Userinfo userinfo);
         void SaveChanges();
     }
 }
