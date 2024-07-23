@@ -5,7 +5,7 @@ namespace RegistrationApi.Repository
     public interface IUserRepository
     {
         IEnumerable<Userinfo> GetAllUsers();
-        Userinfo GetUserByUsernameAndPassword(string username, string password);
+        Userinfo GetUserByUsernameAndPassword(string username, string email);
         int GetusermaxId();
         void AddUser(Userinfo userinfo);
         void SaveChanges();

@@ -12,11 +12,18 @@ namespace RegistrationApi.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _context;
+        
 
         public UserController(IUserRepository context)
         {
-            _context = context;
+           
+            _context=context;
         }
+
+        //public UserController(IUserRepository context)
+        //{
+        //    _context = context;
+        //}
         [HttpGet]
         [Route("Getusers")]
         public IActionResult Getusers()
@@ -31,8 +38,10 @@ namespace RegistrationApi.Controllers
                     userid = u.UserId,
                     username = u.Username,
                     password = u.Password,
-                   
-                }).ToList();
+                    email=u.Email,
+                    mobileNumber = u.MobileNumber,
+                    role=u.Role,
+                    profileImage=u.ProfileImage,}).ToList();
 
                 return Ok(userswithoutnulls);
             }
@@ -44,7 +53,7 @@ namespace RegistrationApi.Controllers
 
         [HttpPost]
         [Route("Registration")]
-        public IActionResult Registration(UserDto UserDto)
+        public IActionResult Registration(Userinfo userinfo)
         {
             try
             {
@@ -60,23 +69,27 @@ namespace RegistrationApi.Controllers
                 var newUserId = maxUserId + 1;
 
                 // Check if username already exists
-                var objUser = _context.GetUserByUsernameAndPassword(UserDto.Username, UserDto.Password);
+                var objUser = _context.GetUserByUsernameAndPassword(userinfo.Username, userinfo.Email);
                 if (objUser != null)
                 {
                     return BadRequest("User already exists");
                 }
 
-                // Create a new Userinfo entity with the generated UserId
+                // Create a new Userinfo entity with the generated UserId and other parameters
                 var newUser = new Userinfo
                 {
                     UserId = newUserId,
-                    Username = UserDto.Username,
-                    Password = UserDto.Password,
-
+                    Username=userinfo.Username,
+                    Password = userinfo.Password,
+                    Role = userinfo.Role,
+                    Email   = userinfo.Email,
+                    MobileNumber = userinfo.MobileNumber,
+                    ProfileImage = userinfo.ProfileImage,
+                    
                 };
 
                 // Add user to DbContext and save changes
-                _context.AddUser(newUser);  
+                _context.AddUser(newUser);
                 _context.SaveChanges();
 
                 return Ok("User registered successfully");
@@ -87,6 +100,7 @@ namespace RegistrationApi.Controllers
                 return StatusCode(500, $"An error occurred while processing your request: {ex.Message}");
             }
         }
+       
 
 
     }

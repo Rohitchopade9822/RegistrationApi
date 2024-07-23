@@ -22,9 +22,9 @@ namespace RegistrationApi.Repository
             return _context.Userinfos.ToList();
         }
 
-        public Userinfo GetUserByUsernameAndPassword(string username, string password)
+        public Userinfo GetUserByUsernameAndPassword(string username, string email)
         {
-            return _context.Userinfos.FirstOrDefault(x => x.Username == username && x.Password == password);
+            return _context.Userinfos.FirstOrDefault(x => x.Username == username && x.Email == email);
         }
 
         public int GetusermaxId()

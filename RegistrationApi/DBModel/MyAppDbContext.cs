@@ -16,8 +16,9 @@ public partial class MyAppDbContext : DbContext
     }
 
     public virtual DbSet<Userinfo> Userinfos { get; set; }
+    public virtual DbSet<Material> Materials { get; set; }
+    public virtual DbSet<CourseMaterialViewModel> CourseMaterialViewModels { get; set; }
 
-    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Userinfo>(entity =>
@@ -45,6 +46,18 @@ public partial class MyAppDbContext : DbContext
             entity.Property(e => e.Username)
                 .HasMaxLength(100)
                 .IsUnicode(false);
+        });
+        modelBuilder.Entity<Material>(entity =>
+        {
+            entity.HasKey(e => e.materialId);
+            entity.ToTable("Material");
+
+            entity.Property(e=>e.courseId).IsRequired(true);
+            entity.Property(e=>e.title).IsRequired(false).HasMaxLength(50);
+            entity.Property(e=>e.description).IsRequired(false).HasMaxLength(500);
+            entity.Property(e=>e.URL).IsRequired(false).HasMaxLength(500);
+            entity.Property(e => e.uploadDate).IsRequired(true);
+            entity.Property(e=>e.contentType).IsRequired(false).HasMaxLength(50);
         });
 
         OnModelCreatingPartial(modelBuilder);
