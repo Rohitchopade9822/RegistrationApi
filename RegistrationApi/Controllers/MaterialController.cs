@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RegistrationApi.DBModel;
-using RegistrationApi.Repository;
+using RegistrationApi.Services;
 using System.Text.Json;
 
 namespace RegistrationApi.Controllers
 {
-  
+
 
     namespace RegistrationApi.Controllers
     {
@@ -20,7 +20,7 @@ namespace RegistrationApi.Controllers
             {
                 _materialRepository = materialRepository;
             }
-
+            
             [HttpGet]
             public IActionResult GetMaterials()
             {
@@ -51,18 +51,33 @@ namespace RegistrationApi.Controllers
               
 
             }
-            [HttpGet]
-            public async Task <IActionResult<IEnumerable<Course>>> GetCourses()
+            [HttpPut("{id}")]
+            public IActionResult UpdateMaterial(int id, Material material) 
             {
-                try
-                {
+                var existingMaterial = _materialRepository.GetMaterialById(id);
 
-                }
-                catch (Exception ex)
+                if (existingMaterial == null)
                 {
-                    return BadRequest(ex);
+                    return NotFound("Material not found.");
                 }
+
+                existingMaterial.title=material.title;
+                existingMaterial.description = material.description;
+                existingMaterial.contentType=material.contentType;
+
+                _materialRepository.UpdateMaterial(existingMaterial);
+
+                return Ok(existingMaterial);
             }
+            [HttpDelete]
+            public IActionResult DeleteMaterial(int id)
+            {
+                _materialRepository.DeleteMaterial(id);
+                return Ok("deleted");
+            }
+            
+
+           
         }
     }
 

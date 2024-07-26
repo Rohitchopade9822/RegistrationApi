@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RegistrationApi.DBModel;
-using RegistrationApi.Repository;
+using RegistrationApi.Services;
 
 
 namespace RegistrationApi.Controllers
@@ -69,7 +69,7 @@ namespace RegistrationApi.Controllers
                 var newUserId = maxUserId + 1;
 
                 // Check if username already exists
-                var objUser = _context.GetUserByUsernameAndPassword(userinfo.Username, userinfo.Email);
+                var objUser = _context.GetUserByUsernameAndPassword(userinfo.Username,userinfo.Email);
                 if (objUser != null)
                 {
                     return BadRequest("User already exists");

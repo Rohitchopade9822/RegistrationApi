@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using RegistrationApi.Controllers.RegistrationApi.Controllers;
 using RegistrationApi.DBModel;
 using RegistrationApi.Repository;
+using RegistrationApi.Services;
 using System.Text.Json.Serialization;
 
 
@@ -27,6 +28,8 @@ builder.Services.AddDbContext<MyAppDbContext>(options =>
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IMaterialRepository, MaterialRepository>();
+builder.Services.AddScoped<ICourseMaterialRepository, CourseMaterialRepository>();
+builder.Services.AddScoped<ICourse, CourseRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

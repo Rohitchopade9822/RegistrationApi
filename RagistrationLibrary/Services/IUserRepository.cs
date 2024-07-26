@@ -1,6 +1,6 @@
 ﻿using RegistrationApi.DBModel;
 
-namespace RegistrationApi.Repository
+namespace RegistrationApi.Services
 {
     public interface IUserRepository
     {

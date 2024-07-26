@@ -13,11 +13,13 @@ public partial class MyAppDbContext : DbContext
     public MyAppDbContext(DbContextOptions<MyAppDbContext> options)
         : base(options)
     {
+
     }
 
     public virtual DbSet<Userinfo> Userinfos { get; set; }
     public virtual DbSet<Material> Materials { get; set; }
     public virtual DbSet<CourseMaterialViewModel> CourseMaterialViewModels { get; set; }
+    public virtual DbSet<Course> Courses { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
