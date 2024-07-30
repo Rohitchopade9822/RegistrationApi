@@ -22,6 +22,7 @@ namespace RegistrationApi.Repository
         {
             material.materialId= GetNextMaterialId();
             _context.Materials.Add(material);
+            _context.SaveChanges();
         }
 
         public void SaveChanges()
@@ -42,7 +43,7 @@ namespace RegistrationApi.Repository
 
         public void UpdateMaterial(Material material)
         {
-          _context.Materials.Update(material);
+            _context.Materials.Update(material);
             _context.SaveChanges();
         }
 

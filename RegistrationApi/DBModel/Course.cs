@@ -11,10 +11,10 @@ namespace RegistrationApi.DBModel
 
             [Required]
             [MaxLength(50)]
-            public string title { get; set; }
+            public string? title { get; set; }
 
             [MaxLength(50)]
-            public string description { get; set; }
+            public string? description { get; set; }
 
             [Column(TypeName = "string")]
             public DateTime courseStartDate { get; set; }
@@ -22,13 +22,13 @@ namespace RegistrationApi.DBModel
             [Column(TypeName = "date")]
             public DateTime courseEndDate { get; set; }
 
-            public int userId { get; set; }
+            public int? userId { get; set; }
 
             [MaxLength(50)]
-            public string category { get; set; }
+            public string? category { get; set; }
 
             [MaxLength(50)]
-            public string level { get; set; }
+            public string? level { get; set; }
         
     }
 }

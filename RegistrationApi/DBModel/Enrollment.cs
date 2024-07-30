@@ -13,6 +13,7 @@ namespace RegistrationApi.DBModel
         public int courseId { get; set; }
 
         [Column(TypeName = "date")] 
+
         public DateTime enrollmentDate { get; set; }
 
         [MaxLength(60)]

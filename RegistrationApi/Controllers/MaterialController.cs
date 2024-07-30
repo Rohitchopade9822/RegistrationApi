@@ -40,6 +40,7 @@ namespace RegistrationApi.Controllers
                 try
                 {
                     _materialRepository.AddMaterial(material);
+
                     _materialRepository.SaveChanges();
 
                     return Ok("Matrial add Successfully");

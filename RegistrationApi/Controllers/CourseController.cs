@@ -24,7 +24,7 @@ namespace RegistrationApi.Controllers
         {
             try
             {
-                var cr = _courses.GetCourses();
+                var cr = _courses.GetCourse();
                 return Ok(cr);
             }
             catch (Exception ex)
@@ -39,8 +39,8 @@ namespace RegistrationApi.Controllers
         {
             try
             {
-                _courses.AddCourses(course);
-                _courses.SaveChangesAsync();
+                _courses.addCourse(course);
+               
                 return Ok("Add Successfuly");
             }
             catch(Exception ex)
@@ -52,7 +52,7 @@ namespace RegistrationApi.Controllers
 
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateCourse(int id, [FromBody] Course updatedCourse)
+        public  IActionResult UpdateCourse(int id, [FromBody] Course updatedCourse)
         {
             if (updatedCourse == null || id != updatedCourse.courseId)
             {
@@ -61,7 +61,7 @@ namespace RegistrationApi.Controllers
 
             try
             {
-                var existingCourse = await _courses.GetCourseByIdAsync(id);
+                var existingCourse = _courses.GetCourseById(id);
 
                 if (existingCourse == null)
                 {
@@ -78,7 +78,7 @@ namespace RegistrationApi.Controllers
                 existingCourse.level = updatedCourse.level;
 
                 // Call the repository method to update the course
-                await _courses.UpdateCourseAsync(existingCourse);
+                 _courses.UpdateCourse(existingCourse);
 
                 return Ok(existingCourse);
             }
@@ -89,18 +89,12 @@ namespace RegistrationApi.Controllers
             }
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> deleteCourse(int id)
+        public  IActionResult deleteCourse(int id)
         {
-            try
-            {
-                await _courses.DeleteCourseAsync(id);
-
-                return Ok("deleted succefully");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Error deleting course: {ex.Message}");
-            }
+                 
+            _courses.deleteCourse(id);
+            return Ok("deleted");
+  
            
         }
 

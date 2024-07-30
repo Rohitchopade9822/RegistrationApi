@@ -9,53 +9,53 @@ namespace RegistrationApi.Repository
     {
         private readonly MyAppDbContext _context;
 
-        public CourseRepository(MyAppDbContext myAppDbContext)
-        {
-            _context = myAppDbContext;
 
+        public CourseRepository()
+        {
+                _context = new MyAppDbContext();
         }
 
-        private int GetMaxId()
-        {
-            var MaxcourseId= _context.Courses.Max(m => (int?)m.courseId) ?? 0;
-            return MaxcourseId + 1;
-        }
-
-        public void AddCourses(Course course)
-        {
-            course.courseId = GetMaxId();
-           _context.Courses.Add(course);
-            
-        }
-
-      
-        public IEnumerable<Course> GetCourses()
+        public IEnumerable<Course> GetCourse()
         {
             return _context.Courses.ToList();
         }
 
-        public async Task<Course> GetCourseByIdAsync(int id)
+        public void addCourse(Course course)
         {
-            return await _context.Courses.FindAsync(id);
+            course.courseId = GetmaxId();
+            _context.Courses.Add(course);
         }
 
-        public async Task UpdateCourseAsync(Course course)
+        public void UpdateCourse(Course course)
         {
             _context.Courses.Update(course);
-            await SaveChangesAsync();
+            _context.SaveChanges();
         }
 
-        public async Task SaveChangesAsync()
+        public void deleteCourse(int courseId)
         {
-            await _context.SaveChangesAsync();
+            var courseid = _context.Materials.Find(courseId);
+            if (courseid != null)
+            {
+                _context.Materials.Remove(courseid);
+                _context.SaveChanges();
+            }
         }
 
-      
-        public async Task DeleteCourseAsync(int id)
+        public int GetmaxId()
         {
-            var course=_context.Courses.Find(id);
-            _context.Courses.Remove(course);
-            await SaveChangesAsync();
+            var maxcourseId = _context.Courses.Max(m => (int?)m.courseId) ?? 0;
+            return maxcourseId + 1;
+        }
+
+        public void SaveChanges()
+        {
+            _context.SaveChanges();
+        }
+
+        public Course GetCourseById(int id)
+        {
+            return _context.Courses.Find(id);
         }
     }
 }

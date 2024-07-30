@@ -4,17 +4,18 @@ namespace RegistrationApi.Services
 {
     public interface ICourse
     {
-        IEnumerable<Course> GetCourses();
+        IEnumerable<Course> GetCourse();
+        
+        void addCourse(Course course);
 
-        void AddCourses(Course course);
+        void UpdateCourse(Course course);
 
-        Task<Course> GetCourseByIdAsync(int id);
+        void deleteCourse(int courseId);
 
-        Task UpdateCourseAsync(Course course);
+        Course GetCourseById(int id);
 
-        Task SaveChangesAsync();
+        void SaveChanges();
 
-        Task DeleteCourseAsync(int id);
 
     }
 }
