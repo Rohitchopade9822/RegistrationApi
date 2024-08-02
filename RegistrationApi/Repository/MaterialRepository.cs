@@ -6,7 +6,7 @@ namespace RegistrationApi.Repository
 {
     public class MaterialRepository : IMaterialRepository
     {
-        private MyAppDbContext _context;
+        private readonly MyAppDbContext _context;
 
         public MaterialRepository(MyAppDbContext context)
         {

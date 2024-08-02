@@ -17,42 +17,50 @@ public partial class MyAppDbContext : DbContext
 
     }
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
-    public virtual DbSet<Userinfo> Userinfos { get; set; }
+    //public virtual DbSet<Userinfo> Userinfos { get; set; }
+
     public virtual DbSet<Material> Materials { get; set; }
+
     public virtual DbSet<CourseMaterialViewModel> CourseMaterialViewModels { get; set; }
+
     public virtual DbSet<Course> Courses { get; set; }
+
     public virtual DbSet<Enrollment> Enrollments { get; set; }
+
     public virtual DbSet<Enquiry> Enquiry { get; set; }
+
     public virtual DbSet<Feedback> Feedbacks { get; set; }
+
+    public virtual DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Userinfo>(entity =>
-        {
-            entity.HasKey(e => e.UserId).HasName("PK__Userinfo__1788CC4C13F2EB39");
+        //modelBuilder.Entity<Userinfo>(entity =>
+        //{
+        //    entity.HasKey(e => e.UserId).HasName("PK__Userinfo__1788CC4C13F2EB39");
 
-            entity.ToTable("Userinfo");
+        //    entity.ToTable("Userinfo");
 
-            entity.Property(e => e.UserId).ValueGeneratedNever(); 
-            entity.Property(e => e.Email)
-                .HasMaxLength(100)
-                .IsUnicode(false);
-            entity.Property(e => e.MobileNumber)
-                .HasMaxLength(15)
-                .IsUnicode(false);
-            entity.Property(e => e.Password)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.ProfileImage)
-                .HasMaxLength(255)
-                .IsUnicode(false);
-            entity.Property(e => e.Role)
-                .HasMaxLength(10)
-                .IsUnicode(false);
-            entity.Property(e => e.Username)
-                .HasMaxLength(100)
-                .IsUnicode(false);
-        });
+        //    entity.Property(e => e.UserId).ValueGeneratedNever(); 
+        //    entity.Property(e => e.Email)
+        //        .HasMaxLength(100)
+        //        .IsUnicode(false);
+        //    entity.Property(e => e.MobileNumber)
+        //        .HasMaxLength(15)
+        //        .IsUnicode(false);
+        //    entity.Property(e => e.Password)
+        //        .HasMaxLength(50)
+        //        .IsUnicode(false);
+        //    entity.Property(e => e.ProfileImage)
+        //        .HasMaxLength(255)
+        //        .IsUnicode(false);
+        //    entity.Property(e => e.Role)
+        //        .HasMaxLength(10)
+        //        .IsUnicode(false);
+        //    entity.Property(e => e.Username)
+        //        .HasMaxLength(100)
+        //        .IsUnicode(false);
+        //});
         modelBuilder.Entity<Material>(entity =>
         {
             entity.HasKey(e => e.materialId);

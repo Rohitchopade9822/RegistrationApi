@@ -4,38 +4,61 @@ using RegistrationApi.Services;
 
 namespace RegistrationApi.Repository
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository:IUser
     {
-        private readonly MyAppDbContext _context;
+        private readonly MyAppDbContext _myAppDbContext;
 
-        public UserRepository(MyAppDbContext context)
+        public UserRepository(MyAppDbContext myAppDbContext)
         {
-            _context = context;
+            _myAppDbContext = myAppDbContext;
         }
 
-        public void AddUser(Userinfo userinfo)
+        public void AddUser(User user)
         {
-           _context.Userinfos.Add(userinfo);
+            user.UserId = GetNextuserId();
+            _myAppDbContext.Users.Add(user);
+            _myAppDbContext.SaveChanges();
         }
 
-        public IEnumerable<Userinfo> GetAllUsers()
+       
+        public void DeleteUser(int UserId)
         {
-            return _context.Userinfos.ToList();
+            var users = _myAppDbContext.Users.Find(UserId);
         }
 
-        public Userinfo GetUserByUsernameAndPassword(string username, string email)
+        public User GetUserbyid(int id)
         {
-            return _context.Userinfos.FirstOrDefault(x => x.Username == username && x.Email == email);
+            return _myAppDbContext.Users.Find(id);
         }
 
-        public int GetusermaxId()
+        public IEnumerable<User> GetUsers()
         {
-            return _context.Userinfos.Max(u => (int?)u.UserId) ?? 0;
+            return _myAppDbContext.Users.ToList();
+        }
+       
+
+        public void Savechanges()
+        {
+            _myAppDbContext.SaveChanges();
         }
 
-        public void SaveChanges()
+        public void UpdateUser(User user)
         {
-           _context.SaveChanges();
+            _myAppDbContext.Update(user);
+            _myAppDbContext.SaveChanges();
+
         }
+
+        
+
+        private int GetNextuserId()
+        {
+            var maxuserId = _myAppDbContext.Users.Max(m => (int?)m.UserId) ?? 0;
+            return maxuserId + 1;
+        }
+
+       
+
+       
     }
 }

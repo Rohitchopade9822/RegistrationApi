@@ -1,9 +1,12 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.DataProtection.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using RegistrationApi.Controllers.RegistrationApi.Controllers;
 using RegistrationApi.DBModel;
 using RegistrationApi.Repository;
 using RegistrationApi.Services;
+using System.Text;
 using System.Text.Json.Serialization;
 
 
@@ -15,6 +18,25 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAuthentication(op =>
+{
+    op.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+            ClockSkew = TimeSpan.Zero,
+            ValidateIssuerSigningKey = true
+
+        };
+    });
 builder.Services.AddControllers()
                 .AddJsonOptions(options =>
                 {
@@ -25,13 +47,15 @@ builder.Services.AddControllers()
 builder.Services.AddDbContext<MyAppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+//builder.Services.AddScoped<IAuthenticationService, AuthenticationRepository>();
+//builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IMaterialRepository, MaterialRepository>();
 builder.Services.AddScoped<ICourseMaterialRepository, CourseMaterialRepository>();
 builder.Services.AddScoped<ICourse, CourseRepository>();
 builder.Services.AddScoped<IEnrollment, EnrollmentRepository>();
 builder.Services.AddScoped<IEnquiry, EnquiryRepository>();
-builder.Services.AddScoped<IFeedback, FeedbackRepository>();
+builder.Services.AddScoped<IFeedback,FeedbackRepository>();
+builder.Services.AddScoped<IUser , UserRepository>();
 
 var app = builder.Build();
 
@@ -43,7 +67,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

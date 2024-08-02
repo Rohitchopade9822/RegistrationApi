@@ -15,7 +15,7 @@ namespace RegistrationApi.Services
 
         Material GetMaterialById(int id);
 
-        void DeleteMaterial(int materialId);
+        void DeleteMaterial(int materialId);                                                                            
 
 
 

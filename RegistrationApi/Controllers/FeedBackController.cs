@@ -11,17 +11,16 @@ namespace RegistrationApi.Controllers
     [ApiController]
     public class FeedBackController : ControllerBase
     {
-        private readonly FeedbackRepository _FeedbackRepository;
-
-        public FeedBackController(FeedbackRepository feedbackRepository)
+        private readonly IFeedback _feedback;
+        public FeedBackController(IFeedback feedback)
         {
-            _FeedbackRepository = feedbackRepository;
+            _feedback=feedback;
         }
         [HttpGet]
         [Route("GetFeedback")]
         public IActionResult GetFeedback()
         {
-            var fd = _FeedbackRepository.GetFeedbacks();
+            var fd = _feedback.GetFeedbacks();
             return Ok(fd);
         }
         [HttpPost]
@@ -30,7 +29,7 @@ namespace RegistrationApi.Controllers
         {
             try
             {
-                _FeedbackRepository.AddFeedback(feedback);
+                _feedback.AddFeedback(feedback);
 
                 return Ok("Feedback add successfuly");
             }
@@ -41,7 +40,7 @@ namespace RegistrationApi.Controllers
 
         }
         [HttpPut]
-        [Route("AddFeedback")]
+        [Route("upFeedback")]
         public IActionResult Updatefeedback(int id ,Feedback feedback)
         {
             if (feedback == null || id != feedback.FeedbackId)
@@ -51,7 +50,7 @@ namespace RegistrationApi.Controllers
 
             try
             {
-                var existingfeedback = _FeedbackRepository.GetFeedbackById(id);
+                var existingfeedback = _feedback.GetFeedbackById(id);
 
                 if (existingfeedback == null)
                 {
@@ -59,11 +58,11 @@ namespace RegistrationApi.Controllers
                 }
 
                 // Update properties of the existing course with new values
-                existingfeedback.FeedbackText = feedback.FeedbackText;
+                existingfeedback.feedback = feedback.feedback;
                 
 
                 // Call the repository method to update the course
-                _FeedbackRepository.UpdateFeedback(existingfeedback);
+                _feedback.UpdateFeedback(existingfeedback);
 
                 return Ok(existingfeedback);
             }
@@ -77,7 +76,7 @@ namespace RegistrationApi.Controllers
         public IActionResult deletefeedback(int id)
         {
 
-            _FeedbackRepository.DeleteFeedback(id);
+            _feedback.DeleteFeedback(id);
             return Ok("deleted");
 
 

@@ -9,9 +9,9 @@ namespace RegistrationApi.Repository
     {
         private readonly MyAppDbContext _context;
         
-        public FeedbackRepository()
+        public FeedbackRepository(MyAppDbContext context)
         {
-            _context = new MyAppDbContext();
+            _context = context;
 
         }
 

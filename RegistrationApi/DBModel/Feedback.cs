@@ -6,13 +6,13 @@ namespace RegistrationApi.DBModel
     public class Feedback
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+ 
         public int FeedbackId { get; set; }
 
-        public int UserId { get; set;}
+        public int? UserId { get; set;}
 
         [MaxLength(500)]
-        public string FeedbackText { get; set; }
+        public string? feedback { get; set; }
 
         [Column("date")]
         public DateTime Date { get; set; }
