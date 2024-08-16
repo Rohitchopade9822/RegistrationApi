@@ -5,15 +5,20 @@ using RegistrationApi.Services;
 
 namespace RegistrationApi.Controllers
 {
-    [Route("api/[controller]")]
+
+    [Route("api/[controller]/[action]")]
+
     [ApiController]
+
     public class UserController : ControllerBase
     {
         private readonly IUser _user;
+
         public UserController(IUser user)
         {
             _user = user;   
         }
+
         [HttpGet]
         public IActionResult GetallUser()
         {
@@ -21,21 +26,32 @@ namespace RegistrationApi.Controllers
             return Ok(us);
 
         }
-       
-        [HttpPost]
-        public IActionResult AddUsers(User user)
+
+		[HttpGet]
+		public IActionResult GetUserbyid(int id)
+		{
+			var us = _user.GetUserbyid(id);
+			return Ok(us);
+
+		}
+
+		[HttpPost]
+        public IActionResult AddUser(User user)
         {
             try
             {
                 _user.AddUser(user);
                 _user.Savechanges();
-                return Ok("succesfull");
+                 return Ok("succesfull");
             }
+
             catch (Exception ex) 
             {
                 return Ok(ex.Message);
             }
+                                      
         }
+
         [HttpPut]
         public IActionResult UpdateUser(int id,User user)
         {
@@ -44,17 +60,27 @@ namespace RegistrationApi.Controllers
 
                 if(exituser==null)
                 {
-                    return NotFound("User not found.");
+                    return NotFound ("User not found.");
                 }
-                exituser.Email = user.Email;
-                exituser.Password = user.Password;
-                exituser.Username= user.Username;
+            exituser.Email = user.Email;
+            exituser.Password = user.Password;
+            exituser.Username = user.Username;
+            exituser.Role = user.Role;
+            exituser.Password=user.Password;
+            exituser.MobileNumber = user.MobileNumber;
+            exituser.ProfileImage = user.ProfileImage;
 
-                _user.UpdateUser(exituser);
+
+            _user.UpdateUser(exituser);
                 return Ok(exituser);
 
-            
-           
+        }
+        [HttpDelete]
+        public IActionResult DeleteUser(int id)
+        {
+            _user.DeleteUser(id);
+            _user.Savechanges();
+            return Ok("deleted");
         }
     }
 }

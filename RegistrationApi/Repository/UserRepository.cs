@@ -24,6 +24,11 @@ namespace RegistrationApi.Repository
         public void DeleteUser(int UserId)
         {
             var users = _myAppDbContext.Users.Find(UserId);
+            if (users != null)
+            {
+                _myAppDbContext.Users.Remove(users);
+                _myAppDbContext.SaveChanges();
+            }
         }
 
         public User GetUserbyid(int id)

@@ -22,6 +22,7 @@ namespace RegistrationApi.DBModel
 
         public string? contentType { get; set; }
 
+        public byte[]? upload_file { get; set; }
 
     }
 }
