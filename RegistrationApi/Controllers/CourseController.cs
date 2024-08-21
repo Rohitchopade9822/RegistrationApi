@@ -11,11 +11,13 @@ namespace RegistrationApi.Controllers
 
     public class CourseController : ControllerBase
     {
+        private readonly ILogger<CourseController> _logger;
         private readonly ICourse _courses;
 
-        public CourseController(ICourse course)
+        public CourseController(ILogger<CourseController> logger, ICourse courses)
         {
-            _courses = course;
+            _logger= logger;
+            _courses = courses;
         }
 
         [HttpGet]
@@ -24,11 +26,15 @@ namespace RegistrationApi.Controllers
         {
             try
             {
+               
                 var cr = _courses.GetCourse();
+              
                 return Ok(cr);
+               
             }
             catch (Exception ex)
             {
+               
                 return BadRequest(ex.Message);
             }
            
@@ -39,12 +45,14 @@ namespace RegistrationApi.Controllers
         {
             try
             {
+                _logger.LogInformation("PostCourses method started");
                 _courses.addCourse(course);
-               
+                _logger.LogInformation("PostCourses method completed");
                 return Ok("Add Successfuly");
             }
             catch(Exception ex)
             {
+                _logger.LogInformation("PostCourses method got Exception");
                 return BadRequest(ex.Message);
             }
 
@@ -65,6 +73,7 @@ namespace RegistrationApi.Controllers
 
                 if (existingCourse == null)
                 {
+                    _logger.LogInformation("Method have Bad Request");
                     return NotFound("Course not found.");
                 }
 

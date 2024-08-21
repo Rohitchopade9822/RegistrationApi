@@ -14,14 +14,18 @@ namespace RegistrationApi.Controllers
     {
         private readonly IUser _user;
 
-        public UserController(IUser user)
+        private readonly ILogger<UserController> _logger;
+        public UserController(ILogger<UserController> logger,IUser user)
         {
-            _user = user;   
+            _logger = logger;
+            _user = user;
         }
 
+       
         [HttpGet]
         public IActionResult GetallUser()
         {
+            //_logger.LogWarning("Get user material excuting");
             var us = _user.GetUsers();
             return Ok(us);
 
@@ -30,7 +34,9 @@ namespace RegistrationApi.Controllers
 		[HttpGet]
 		public IActionResult GetUserbyid(int id)
 		{
+            _logger.LogInformation("get use api start excuting");
 			var us = _user.GetUserbyid(id);
+
 			return Ok(us);
 
 		}
@@ -40,6 +46,7 @@ namespace RegistrationApi.Controllers
         {
             try
             {
+                _logger.LogInformation("Post use api start excuting");
                 _user.AddUser(user);
                 _user.Savechanges();
                  return Ok("succesfull");

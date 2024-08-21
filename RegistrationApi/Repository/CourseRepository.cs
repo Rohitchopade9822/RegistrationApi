@@ -10,9 +10,9 @@ namespace RegistrationApi.Repository
         private readonly MyAppDbContext _context;
 
 
-        public CourseRepository()
+        public CourseRepository(MyAppDbContext myAppDbContext)
         {
-                _context = new MyAppDbContext();
+                _context= myAppDbContext;
         }
 
         public IEnumerable<Course> GetCourse()

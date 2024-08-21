@@ -20,7 +20,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAuthentication(op =>
 {
-    op.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    //op.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
 })
     .AddJwtBearer(options =>
     {
@@ -56,6 +56,7 @@ builder.Services.AddScoped<IEnrollment, EnrollmentRepository>();
 builder.Services.AddScoped<IEnquiry, EnquiryRepository>();
 builder.Services.AddScoped<IFeedback,FeedbackRepository>();
 builder.Services.AddScoped<IUser , UserRepository>();
+
 
 var app = builder.Build();
 

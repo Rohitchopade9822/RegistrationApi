@@ -18,7 +18,7 @@ public partial class MyAppDbContext : DbContext
     }
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
     //public virtual DbSet<Userinfo> Userinfos { get; set; }
-
+    
     public virtual DbSet<Material> Materials { get; set; }
 
     public virtual DbSet<CourseMaterialViewModel> CourseMaterialViewModels { get; set; }
