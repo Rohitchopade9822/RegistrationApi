@@ -1,4 +1,5 @@
 ﻿using ConsumeAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
@@ -17,7 +18,7 @@ namespace NewAPIConsume.Controllers
 		}
       
 		[HttpGet]
-		public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index()
 		{
 
 			List<UserModel> userslist = new List<UserModel>();
@@ -30,6 +31,7 @@ namespace NewAPIConsume.Controllers
 
 				userslist = JsonConvert.DeserializeObject<List<UserModel>>(Data);
 			}
+
 
 			return View(userslist);
 
@@ -93,7 +95,7 @@ namespace NewAPIConsume.Controllers
 				HttpResponseMessage response = await _httpClient.PutAsync(_httpClient.BaseAddress + "/User/UpdateUser?id=" + id, content);
 				if (response.IsSuccessStatusCode)
 				{
-					TempData["successmsg"] = "user updated"; /*//https://localhost:44368/api/User/UpdateUser?id=1*/
+					TempData["successmsg"] = "user updated"; 
                     return RedirectToAction("Index");
 				}
 

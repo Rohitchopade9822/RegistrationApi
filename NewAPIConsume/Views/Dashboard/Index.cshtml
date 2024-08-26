@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@{
+    ViewData["Title"] = "Main Dashboard";
+}
+
+
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Courses</h2>
+        <ul class="list-group">
+           
+            <li class="list-group-item">
+                <a class="nav-link text-dark " asp-area="" asp-controller="User" asp-action="Index">All Users</a>
+                <a class="nav-link text-dark " asp-area="" asp-controller="Course" asp-action="Index">All Course</a>
+            </li>
+        </ul>
+    </div>
+   
+</div>
+

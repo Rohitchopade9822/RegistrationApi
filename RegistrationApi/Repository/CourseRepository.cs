@@ -24,6 +24,7 @@ namespace RegistrationApi.Repository
         {
             course.courseId = GetmaxId();
             _context.Courses.Add(course);
+            _context.SaveChanges();
         }
 
         public void UpdateCourse(Course course)

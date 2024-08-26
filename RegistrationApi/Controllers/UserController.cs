@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RegistrationApi.DBModel;
 using RegistrationApi.Services;
@@ -23,6 +24,7 @@ namespace RegistrationApi.Controllers
 
        
         [HttpGet]
+       // [Authorize (Roles ="Teacher")]
         public IActionResult GetallUser()
         {
             //_logger.LogWarning("Get user material excuting");

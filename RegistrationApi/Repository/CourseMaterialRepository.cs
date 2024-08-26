@@ -13,9 +13,9 @@ namespace RegistrationApi.Repository
         {
             _myAppDbContext = myAppDbContext;
         }
-        public async Task<IEnumerable<CourseMaterialViewModel>> GetCourseMaterials()
+        public async Task<IEnumerable<Course>> GetCourseMaterials()
         {
-            return await _myAppDbContext.Set<CourseMaterialViewModel>()
+            return await _myAppDbContext.Set<Course>()
            .FromSqlRaw("_getCourse_Materails")
            .ToListAsync();
         }
