@@ -9,6 +9,7 @@ namespace RegistrationApi.Controllers
     public class EnrollmentController : ControllerBase
     {
         private readonly IEnrollment _enrollmentService;
+
         public EnrollmentController(IEnrollment enrollment)
         {
             _enrollmentService = enrollment;   
