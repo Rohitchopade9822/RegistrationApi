@@ -40,18 +40,21 @@ namespace NewAPIConsume.Controllers
 
                 string token = response.Content.ReadAsStringAsync().Result;
 
-                if (token == "Username and Password is not correct")
+                if (token == "Invalid username or password.")
                 {
                     ViewBag.Message = "incorrect passwprd or username";
 
-
-                    return Redirect("~/Login/Index"); // Redirect to protected area
+                    //ModelState.AddModelError("Username", "Invalid username or password.");
+                    ViewBag.ErrorMessage = "Invalid username or password.";
+                    return View("Index", login);
+                  //  return View("~/Login/Index"); // Redirect to protected area
                 }
                 HttpContext.Session.SetString("token", token);
 
             }
 
             return Redirect("~/Dashboard/Index");
+            
         }
         public IActionResult Logout()
         {

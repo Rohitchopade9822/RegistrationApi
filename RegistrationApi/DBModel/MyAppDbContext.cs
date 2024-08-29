@@ -33,8 +33,8 @@ public partial class MyAppDbContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
+    //protected override void OnModelCreating(ModelBuilder modelBuilder)
+    //{
         //modelBuilder.Entity<Userinfo>(entity =>
         //{
         //    entity.HasKey(e => e.UserId).HasName("PK__Userinfo__1788CC4C13F2EB39");
@@ -53,7 +53,7 @@ public partial class MyAppDbContext : DbContext
         //        .IsUnicode(false);
         //    entity.Property(e => e.ProfileImage)
         //        .HasMaxLength(255)
-        //        .IsUnicode(false);
+        //        .IsUnicode(false);b
         //    entity.Property(e => e.Role)
         //        .HasMaxLength(10)
         //        .IsUnicode(false);
@@ -61,21 +61,21 @@ public partial class MyAppDbContext : DbContext
         //        .HasMaxLength(100)
         //        .IsUnicode(false);
         //});
-        modelBuilder.Entity<Material>(entity =>
-        {
-            entity.HasKey(e => e.materialId);
-            entity.ToTable("Materials");
+        //modelBuilder.Entity<Material>(entity =>
+        //{
+        //    entity.HasKey(e => e.materialId);
+        //    entity.ToTable("Materials");
 
-            entity.Property(e => e.courseId).IsRequired(true);
-            entity.Property(e => e.title).IsRequired(false).HasMaxLength(50);
-            entity.Property(e => e.description).IsRequired(false).HasMaxLength(500);
-            entity.Property(e => e.URL).IsRequired(false).HasMaxLength(500);
-            entity.Property(e => e.uploadDate).IsRequired(true);
-            entity.Property(e => e.contentType).IsRequired(false).HasMaxLength(50);
-        });
+        //    entity.Property(e => e.courseId).IsRequired(true);
+        //    entity.Property(e => e.title).IsRequired(false).HasMaxLength(50);
+        //    entity.Property(e => e.description).IsRequired(false).HasMaxLength(500);
+        //    entity.Property(e => e.URL).IsRequired(false).HasMaxLength(500);
+        //    entity.Property(e => e.uploadDate).IsRequired(true);
+        //    entity.Property(e => e.contentType).IsRequired(false).HasMaxLength(50);
+        //});
 
-        OnModelCreatingPartial(modelBuilder);
-    }
+        //OnModelCreatingPartial(modelBuilder);
+    //}
 
-    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+   // partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }

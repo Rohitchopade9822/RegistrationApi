@@ -1,0 +1,68 @@
+﻿@model NewAPIConsume.Models.Material
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Material</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="materialId" class="control-label"></label>
+                <input asp-for="materialId" class="form-control" />
+                <span asp-validation-for="materialId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="courseId" class="control-label"></label>
+                <input asp-for="courseId" class="form-control" />
+                <span asp-validation-for="courseId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="title" class="control-label"></label>
+                <input asp-for="title" class="form-control" />
+                <span asp-validation-for="title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="description" class="control-label"></label>
+                <input asp-for="description" class="form-control" />
+                <span asp-validation-for="description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="URL" class="control-label"></label>
+                <input asp-for="URL" class="form-control" />
+                <span asp-validation-for="URL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="uploadDate" class="control-label"></label>
+                <input asp-for="uploadDate" class="form-control" />
+                <span asp-validation-for="uploadDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="contentType" class="control-label"></label>
+                <input asp-for="contentType" class="form-control" />
+                <span asp-validation-for="contentType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="upload_file" class="control-label"></label>
+                <input asp-for="upload_file" class="form-control" />
+                <span asp-validation-for="upload_file" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

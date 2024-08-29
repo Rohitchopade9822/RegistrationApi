@@ -1,19 +1,16 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using RegistrationApi.DBModel;
-using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace RegistrationApi.DBModel
+namespace NewAPIConsume.Models
 {
     public class Material
     {
-        [Key] 
-        public int? materialId { get; set; }    
-        
+        [Key]
+        public int? materialId { get; set; }
+
         public int? courseId { get; set; }
 
         public string? title { get; set; }
-            
+
         public string? description { get; set; }
 
         public string? URL { get; set; }
@@ -26,5 +23,3 @@ namespace RegistrationApi.DBModel
 
     }
 }
-
-

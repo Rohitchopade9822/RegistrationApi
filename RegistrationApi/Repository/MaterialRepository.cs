@@ -37,6 +37,7 @@ namespace RegistrationApi.Repository
 
         public Material GetMaterialById(int id)
         {
+
             return _context.Materials.Find(id);
 
         }

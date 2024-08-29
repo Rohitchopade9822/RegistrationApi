@@ -33,10 +33,10 @@ namespace RegistrationApi.Controllers
 
             var validateUser =  _userInfoContext.Users.FirstOrDefault(e => e.Password == user.Password);
 
-           // var result = _passwordHasher.Verify(validateUser.Password, userModel.Password);
+            //var result = _passwordHasher.Verify(validateUser.Password, userModel.Password);
             if (validateUser==null)
             {
-                throw new Exception("Username and Password is not correct.");
+                return BadRequest("Invalid username or password.");
             }
 
             if (validateUser != null)
