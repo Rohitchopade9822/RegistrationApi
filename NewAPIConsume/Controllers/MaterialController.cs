@@ -25,9 +25,11 @@ namespace NewAPIConsume.Controllers
             List<Material> materials = new List<Material>();
 
             HttpResponseMessage response = await _httpClient.GetAsync(_httpClient.BaseAddress +
-            "Materials");
+            "Materials/GetMaterials");
 
-            if(response.IsSuccessStatusCode)
+            //https://localhost:44368/api/Materials/GetMaterials
+
+            if (response.IsSuccessStatusCode)
             {
                 var Data = response.Content.ReadAsStringAsync().Result;
 
@@ -64,14 +66,14 @@ namespace NewAPIConsume.Controllers
             try
             {
                 Material material = new Material();
-                HttpResponseMessage response = _httpClient.GetAsync(_httpClient.BaseAddress + "Materials?id" + id).Result;
+                HttpResponseMessage response = _httpClient.GetAsync(_httpClient.BaseAddress + "Materials/IdbyMaterial?id=" + id).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
                     material = JsonConvert.DeserializeObject<Material>(data);
                 }
                 return View(material);
-            }
+            }//https://localhost:44368/api/Materials/IdbyMaterial?id=1
             catch (Exception ex)
             {
 
@@ -88,14 +90,14 @@ namespace NewAPIConsume.Controllers
             {
                 string data = JsonConvert.SerializeObject(material);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await _httpClient.PutAsync(_httpClient.BaseAddress + "Materials?id" + id, content);
+                HttpResponseMessage response = await _httpClient.PutAsync(_httpClient.BaseAddress + "Materials/UpdateMaterial/" + id, content);
                 if (response.IsSuccessStatusCode)
                 {
                     TempData["successmsg"] = "Material updated";
                     return RedirectToAction("Index");
                 }
 
-            }
+            }//https://localhost:44368/api/Materials/UpdateMaterial/1
             catch (Exception ex)
             {
 
@@ -104,6 +106,47 @@ namespace NewAPIConsume.Controllers
             }
 
 
+            return View();
+        }
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                Material material = new Material();
+                HttpResponseMessage response = _httpClient.GetAsync(_httpClient.BaseAddress + "Materials/IdbyMaterial?id=" + id).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = response.Content.ReadAsStringAsync().Result;
+                    material = JsonConvert.DeserializeObject<Material>(data);
+                }
+                return View(material);
+            }//https://localhost:44368/api/Materials/DeleteMaterial?id=1
+            catch (Exception ex)
+            {
+
+                TempData["errormsg"] = ex.Message;
+                return View();
+            }
+
+        }
+        [HttpPost]
+        public ActionResult Delete(int id,Material material)
+        {
+            try
+            {
+                string data = JsonConvert.SerializeObject(material);
+                HttpResponseMessage response =  _httpClient.DeleteAsync(_httpClient.BaseAddress + "Materials/DeleteMaterial?id=" + id).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    TempData["successmsg"] = "user Deleted"; /*//https://localhost:44368/api/User/UpdateUser?id=1*/
+                    return RedirectToAction("Index");
+                }
+            }
+            catch
+            {
+
+            }
             return View();
         }
     }

@@ -5,15 +5,15 @@
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
-<h1>Index</h1>
 
-<h4>LoginViewModel</h4>
+
+<h4>Student Login</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
        
         <form asp-action="LoginUser" asp-controller="Login" class="login-form">
-            <h2 class="form-title">Login</h2>
+            <h2 class="form-title">Student</h2>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Username" class="control-label"></label>
@@ -28,7 +28,7 @@
 
             <div class="form-group">
 
-                <button type="submit" class="btn btn-primary btn-block">Login</button>
+                <button type="submit" class="btn btn-primary btn-block">Student Login</button>
 
             </div>
             <div>
@@ -43,6 +43,39 @@
 
         </form>
     </div>
+@*     <div class="col-md-4">
+
+        <form asp-action="LoginUser" asp-controller="Educator" class="login-form">
+            <h2 class="form-title">Educator</h2>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" placeholder="Username">
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" placeholder="Password">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+
+                <button type="submit" class="btn btn-primary btn-block">Educator Login</button>
+
+            </div>
+            <div>
+                @if (ViewBag.ErrorMessage != null)
+                {
+                    <div class="alert alert-danger small">
+                        @ViewBag.ErrorMessage
+                    </div>
+                }
+            </div>
+
+
+        </form>
+    </div> *@
 </div>
 
 <div>

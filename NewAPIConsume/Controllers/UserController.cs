@@ -1,8 +1,12 @@
 ﻿using ConsumeAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NewAPIConsume.Models;
 using Newtonsoft.Json;
+using NuGet.Common;
+using System.Net.Http;
 using System.Text;
+using System.Net.Http.Headers;
 namespace NewAPIConsume.Controllers
 {
 	public class UserController : Controller
@@ -21,7 +25,11 @@ namespace NewAPIConsume.Controllers
         public async Task<IActionResult> Index()
 		{
 
-			List<UserModel> userslist = new List<UserModel>();
+            var access_token=HttpContext.Session.GetString("token");
+
+			_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", access_token);
+
+            List<UserModel> userslist = new List<UserModel>();
 			HttpResponseMessage response = await _httpClient.GetAsync(_httpClient.BaseAddress +
 			"/User/GetallUser");
 
@@ -115,12 +123,12 @@ namespace NewAPIConsume.Controllers
         {
             try
             {
-                UserModel flight = new UserModel();
+                Material flight = new Material();
                 HttpResponseMessage response = _httpClient.GetAsync(_httpClient.BaseAddress + "/User/GetUserbyid?id=" + id).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
-                    flight = JsonConvert.DeserializeObject<UserModel>(data);
+                    flight = JsonConvert.DeserializeObject<Material>(data);
                 }
                 return View(flight);
             }
@@ -132,14 +140,13 @@ namespace NewAPIConsume.Controllers
             }
 
         }
-		
 		[HttpPost]
-        public async Task<ActionResult> Delete(int id, UserModel model)
+        public async Task<ActionResult> Delete(int id, Material material)
         {
 
             try
             {
-                string data = JsonConvert.SerializeObject(model);
+                string data = JsonConvert.SerializeObject(material);
              //   StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = await _httpClient.DeleteAsync(_httpClient.BaseAddress + "/User/DeleteUser?id=" + id);
                 if (response.IsSuccessStatusCode)

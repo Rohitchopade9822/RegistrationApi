@@ -13,10 +13,10 @@ namespace RegistrationApi.Repository
         {
             _myAppDbContext = myAppDbContext;
         }
-        public async Task<IEnumerable<Course>> GetCourseMaterials()
+        public async Task<IEnumerable<CourseMaterialViewModel>> GetCourseMaterials()
         {
-            return await _myAppDbContext.Set<Course>()
-           .FromSqlRaw("_getCourse_Materails")
+            return await _myAppDbContext.Set<CourseMaterialViewModel>()
+           .FromSqlRaw("CourseMaterial")
            .ToListAsync();
         }
     }

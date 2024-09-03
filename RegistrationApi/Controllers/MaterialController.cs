@@ -10,7 +10,7 @@ namespace RegistrationApi.Controllers
 
     namespace RegistrationApi.Controllers
     {
-        [Route("api/[controller]")]
+        [Route("api/[controller]/[action]")]
         [ApiController]
         public class MaterialsController : ControllerBase
         {
@@ -20,7 +20,7 @@ namespace RegistrationApi.Controllers
             {
                 _materialRepository = materialRepository;
             }
-            
+
             [HttpGet]
             public IActionResult GetMaterials()
             {
@@ -33,6 +33,22 @@ namespace RegistrationApi.Controllers
                 {
                     return StatusCode(500, $"An error occurred while retrieving materials: {ex.Message}");
                 }
+            }
+
+            [HttpGet]
+            public IActionResult IdbyMaterial(int id)
+            {
+                try
+                {
+                    var materialbyid = _materialRepository.GetMaterialById(id);
+                    return Ok(materialbyid);
+                }
+                catch
+                {
+                    return StatusCode(500, $"An error occurred while retrieving materials");
+                }
+
+
             }
             [HttpPost]
             public IActionResult AddMaterial(Material material) 

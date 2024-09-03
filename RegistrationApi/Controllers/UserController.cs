@@ -24,10 +24,11 @@ namespace RegistrationApi.Controllers
 
        
         [HttpGet]
-       // [Authorize (Roles ="Teacher")]
+        //[Authorize (Roles ="Teacher")]
+        [Authorize]
         public IActionResult GetallUser()
         {
-            //_logger.LogWarning("Get user material excuting");
+            
             var us = _user.GetUsers();
             return Ok(us);
 
@@ -36,7 +37,7 @@ namespace RegistrationApi.Controllers
 		[HttpGet]
 		public IActionResult GetUserbyid(int id)
 		{
-            _logger.LogInformation("get use api start excuting");
+            
 			var us = _user.GetUserbyid(id);
 
 			return Ok(us);

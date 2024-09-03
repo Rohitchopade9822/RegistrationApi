@@ -4,6 +4,6 @@ namespace RegistrationApi.Services
 {
     public interface ICourseMaterialRepository
     {
-        Task<IEnumerable<Course>> GetCourseMaterials();
+        Task<IEnumerable<CourseMaterialViewModel>> GetCourseMaterials();
     }
 }
