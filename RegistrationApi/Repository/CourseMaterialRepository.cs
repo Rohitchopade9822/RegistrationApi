@@ -1,5 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using RegistrationApi.DBModel;
 using RegistrationApi.Services;
 
@@ -13,11 +12,14 @@ namespace RegistrationApi.Repository
         {
             _myAppDbContext = myAppDbContext;
         }
-        public async Task<IEnumerable<CourseMaterialViewModel>> GetCourseMaterials()
+        public async Task<IEnumerable<CourseMaterialViewModel>> GetCourseMaterials(int courseId)
         {
-            return await _myAppDbContext.Set<CourseMaterialViewModel>()
-           .FromSqlRaw("CourseMaterial")
+            var Coursematerial= await _myAppDbContext.Set<CourseMaterialViewModel>()
+           .FromSqlRaw("EXEC new_CourseMaterial @courseId = {0}", courseId)
            .ToListAsync();
+            return Coursematerial;
         }
+
+        
     }
 }

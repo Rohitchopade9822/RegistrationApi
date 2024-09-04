@@ -1,15 +1,16 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RegistrationApi.DBModel;
 using RegistrationApi.Services;
 using System.Linq;
 namespace RegistrationApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class CourseMaterialsController : ControllerBase
     {
 
-        private readonly ICourseMaterialRepository _courseMaterialRepository;
+        private readonly ICourseMaterialRepository _courseMaterialRepository; 
 
         public CourseMaterialsController(ICourseMaterialRepository courseMaterialRepository)
         {
@@ -17,10 +18,19 @@ namespace RegistrationApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetCourseMaterials()
+        public async Task<IActionResult> GetCourseMaterials(int courseId)
         {
-            var courseMaterials = await _courseMaterialRepository.GetCourseMaterials();
-            return Ok(courseMaterials);
+            var courseMaterials = await _courseMaterialRepository.GetCourseMaterials( courseId);
+            if (courseMaterials.Any())
+            {
+                return Ok(courseMaterials);
+            }
+            else
+            {
+                return NotFound(); 
+            }
+            
+
         }
     }
 }

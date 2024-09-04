@@ -91,9 +91,13 @@
                 @Html.DisplayFor(modelItem => item.ContentType)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new {  id=item.CourseId  }) |
-                @Html.ActionLink("Details", "Details", new {  id=item.CourseId  }) |
-                @Html.ActionLink("Delete", "Delete", new {  id=item.CourseId  })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.UserId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.UserId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.UserId })
+
+                <a class="nav-link" style="color: darkcyan;" asp-area="" asp-controller="CourseMaterialViewModel" asp-action="Index"> CourseMaterial </a>
+                  
+
             </td>
         </tr>
 }
