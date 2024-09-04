@@ -41,5 +41,4 @@ public class Course
 
 
 
-    public string? ContentType { get; set; }
 }

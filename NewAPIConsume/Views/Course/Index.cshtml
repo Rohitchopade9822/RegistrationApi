@@ -6,9 +6,9 @@
 
 <h1>Index</h1>
 
-<p>
+@* <p>
     <a asp-action="Create">Create New</a>
-</p>
+</p> *@
 <table class="table">
     <thead>
         <tr>
@@ -45,10 +45,8 @@
             <th>
                 @Html.DisplayNameFor(model => model.UploadDate)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ContentType)
-            </th>
-            <th></th>
+           
+            <th> Material Link</th>
         </tr>
     </thead>
     <tbody>
@@ -87,12 +85,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.UploadDate)
             </td>
+            
             <td>
-                @Html.DisplayFor(modelItem => item.ContentType)
-                </td>
-            <td>
-                   @*  @Html.ActionLink("CourseMaterialViewModel", "Index", new { id = item.CourseId }) *@
-                    <a class="nav-link" style="color: darkcyan;" asp-area="" asp-controller="CourseMaterialViewModel" asp-action="Index" asp-route-id="@item.CourseId"> CourseMaterial </a>
+                  
+                    <a class="nav-link" style="color: darkcyan;" asp-area="" asp-controller="CourseMaterialViewModel" asp-action="Index" asp-route-id="@item.CourseId"> Course Material </a>
 
             </td>
         </tr>
