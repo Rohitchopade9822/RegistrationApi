@@ -89,14 +89,10 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ContentType)
-            </td>
+                </td>
             <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.UserId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.UserId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.UserId })
-
-                <a class="nav-link" style="color: darkcyan;" asp-area="" asp-controller="CourseMaterialViewModel" asp-action="Index"> CourseMaterial </a>
-                  
+                   @*  @Html.ActionLink("CourseMaterialViewModel", "Index", new { id = item.CourseId }) *@
+                    <a class="nav-link" style="color: darkcyan;" asp-area="" asp-controller="CourseMaterialViewModel" asp-action="Index" asp-route-id="@item.CourseId"> CourseMaterial </a>
 
             </td>
         </tr>

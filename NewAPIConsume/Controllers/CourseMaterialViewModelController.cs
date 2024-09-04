@@ -6,7 +6,7 @@ namespace NewAPIConsume.Controllers
 {
     public class CourseMaterialViewModelController : Controller
     {
-        Uri BaseAddress=new Uri("https://localhost:44368/api/");
+        Uri BaseAddress=new Uri("https://localhost:44368/api");
         private HttpClient _httpClient;
 
         public CourseMaterialViewModelController()
@@ -17,15 +17,13 @@ namespace NewAPIConsume.Controllers
         }
 
         [HttpGet]
-        public async Task <IActionResult> Index()
+        public async Task <IActionResult> Index(int id)
         {
             List<CourseMaterialViewModel> courseMaterialViewModels =new List<CourseMaterialViewModel>();
 
-            HttpResponseMessage response= await _httpClient.GetAsync("CourseMaterials/GetCourseMaterials");
+            HttpResponseMessage response= await _httpClient.GetAsync("https://localhost:44368/api/CourseMaterials/GetCourseMaterials?courseId=" + id);
 
-            
-            //https://localhost:44368/api/CourseMaterials/GetCourseMaterials
-
+            //https://localhost:44368/api/CourseMaterials/GetCourseMaterials?courseId=2
 
             if (response.IsSuccessStatusCode)
             {
