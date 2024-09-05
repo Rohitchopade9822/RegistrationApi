@@ -7,7 +7,7 @@ builder.Services.AddSession(option => { option.IdleTimeout = TimeSpan.FromMinute
 });
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 var app = builder.Build();
 

@@ -1,4 +1,4 @@
-﻿using ConsumeAPI.Models;
+﻿
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NewAPIConsume.Models;
@@ -7,6 +7,7 @@ using NuGet.Common;
 using System.Net.Http;
 using System.Text;
 using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Mvc.Rendering;
 namespace NewAPIConsume.Controllers
 {
 	public class UserController : Controller
@@ -48,6 +49,13 @@ namespace NewAPIConsume.Controllers
 		[HttpGet]
 		public IActionResult Create()
 		{
+			List<SelectListItem> roles = new List<SelectListItem>()
+		   {new SelectListItem { Text = "Student", Value = "Student" },
+			new SelectListItem{ Text="Educator",Value="Educator"},
+
+			};
+			ViewBag.user_roles = roles;
+
 
 			return View();
 		}
@@ -55,8 +63,9 @@ namespace NewAPIConsume.Controllers
 	    [HttpPost]
 		public async Task<IActionResult> Create(UserModel userModel)
 		{
+       
 
-			string data = JsonConvert.SerializeObject(userModel);
+            string data = JsonConvert.SerializeObject(userModel);
 
 			StringContent stringContent = new StringContent(data, Encoding.UTF8, "application/json");
 
@@ -65,7 +74,7 @@ namespace NewAPIConsume.Controllers
 
 			if (response.IsSuccessStatusCode)
 			{
-				return RedirectToAction("Index");
+				return View("~/Views/SuccessView.cshtml");
 			}
 			return View();
 

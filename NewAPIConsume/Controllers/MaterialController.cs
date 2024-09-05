@@ -1,5 +1,4 @@
-﻿using Azure;
-using ConsumeAPI.Models;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using NewAPIConsume.Models;
 using Newtonsoft.Json;
