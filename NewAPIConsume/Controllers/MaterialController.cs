@@ -52,10 +52,12 @@ namespace NewAPIConsume.Controllers
             StringContent stringContent = new StringContent(data, Encoding.UTF8, "application/json");
 
             HttpResponseMessage response = await _httpClient.PostAsync(_httpClient.BaseAddress +
-                "Materials", stringContent);
-            if(response.IsSuccessStatusCode)
+                "Materials/AddMaterial", stringContent);
+            //https://localhost:44368/api/Materials/AddMaterial
+            if (response.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index");
+                TempData["success"] = "New Material created Successfully";
+                return View("~/Views/SuccessView.cshtml");
             }
             return View();
         }
@@ -70,8 +72,10 @@ namespace NewAPIConsume.Controllers
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
                     material = JsonConvert.DeserializeObject<Material>(data);
+
+                    TempData["success"] = "Successfully";
                 }
-                return View(material);
+                return View("~/Views/SuccessView.cshtml");
             }//https://localhost:44368/api/Materials/IdbyMaterial?id=1
             catch (Exception ex)
             {

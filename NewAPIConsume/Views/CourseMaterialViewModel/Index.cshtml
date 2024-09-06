@@ -4,12 +4,33 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #D6EEEE;
+        }
+    </style>
+</head>
+<body>
+
+    <h2 style="color:cadetblue" >  Material hub for Course</h2>
+
+
+    <img src="~/Images/Book.jpg" alt="Book Description" height="200" width="500" style="border-radius: 10px 10px 10px 10px;">
+
+<table class="mt-2" >
     <thead>
         <tr>
             <th>
@@ -33,7 +54,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.level)
             </th>
-            <th></th>
+            
         </tr>
     </thead>
     <tbody>
@@ -60,11 +81,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.level)
             </td>
-            <td>
-                    @* @Html.ActionLink("CourseMaterialViewModel", "Index", new { id = item.CourseId }) *@
-
-            </td>
+          
         </tr>
 }
     </tbody>
 </table>
+</body>
+</html>
+
+
+

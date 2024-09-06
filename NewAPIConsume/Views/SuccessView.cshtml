@@ -1,4 +1,42 @@
-﻿<h2 style="color:cadetblue">Successfully Register!</h2>
+﻿
+
 <div class="text-success">
-    <a asp-controller="Login" asp-action="Index">Back to Login Page</a>
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+            a:link {
+                color: green;
+                background-color: transparent;
+                text-decoration: none;
+            }
+
+            a:visited {
+                color: darkblue;
+                background-color: transparent;
+                text-decoration: none;
+            }
+
+            a:hover {
+                color: cornflowerblue;
+                background-color: transparent;
+                text-decoration: underline;
+            }
+
+            a:active {
+                color: yellow;
+                background-color: transparent;
+                text-decoration: underline;
+            }
+        </style>
+     </head>
+        <body>
+
+        <h2> @TempData["success"]</h2>
+
+        <a asp-controller="Dashboard" asp-action="Index">Back to Dashboard Page</a>
+
+        </body>
+     </html>
+     
 </div>

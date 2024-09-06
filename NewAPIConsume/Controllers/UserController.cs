@@ -113,7 +113,7 @@ namespace NewAPIConsume.Controllers
 				if (response.IsSuccessStatusCode)
 				{
 					TempData["successmsg"] = "user updated"; 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Dashboard");
 				}
 
 			}

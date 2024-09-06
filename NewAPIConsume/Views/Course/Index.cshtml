@@ -4,11 +4,29 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
 
-@* <p>
-    <a asp-action="Create">Create New</a>
-</p> *@
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: lavender;
+        }
+    </style>
+</head>
+<body>
+    
+    <img src="~/Images/programer.webp" alt="Image Description" height="200" width="300">
+
 <table class="table">
     <thead>
         <tr>
@@ -95,3 +113,7 @@
 }
     </tbody>
 </table>
+</body>
+</html>
+
+

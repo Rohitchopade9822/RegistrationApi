@@ -50,6 +50,7 @@ namespace NewAPIConsume.Controllers
                 }
                 HttpContext.Session.SetString("token", token);
 
+
             }
 
             return Redirect("~/Dashboard/Index");
