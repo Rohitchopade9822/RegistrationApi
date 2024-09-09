@@ -25,7 +25,8 @@ namespace RegistrationApi.Repository
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Username.ToString()),
                 new Claim(ClaimTypes.Name, user.Username),
-                new Claim(ClaimTypes.Role, user.Role)
+                new Claim(ClaimTypes.Role, user.Role),
+              
             };
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));

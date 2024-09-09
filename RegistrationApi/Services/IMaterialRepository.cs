@@ -13,9 +13,10 @@ namespace RegistrationApi.Services
 
         void UpdateMaterial(Material material);
 
-        Material GetMaterialById(int id);
+        Material GetMaterialById(int userid);
 
-        void DeleteMaterial(int materialId);                                                                            
+        void DeleteMaterial(int materialId); 
+        
 
 
 

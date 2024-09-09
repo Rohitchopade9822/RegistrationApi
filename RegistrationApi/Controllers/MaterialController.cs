@@ -35,12 +35,13 @@ namespace RegistrationApi.Controllers
                 }
             }
 
-            [HttpGet]
-            public IActionResult IdbyMaterial(int id)
+             //[HttpGet]
+            [HttpGet("{userId}")]
+            public IActionResult IdbyMaterial( int userId)
             {
                 try
                 {
-                    var materialbyid = _materialRepository.GetMaterialById(id);
+                    var materialbyid = _materialRepository.GetMaterialById(userId);
                     return Ok(materialbyid);
                 }
                 catch

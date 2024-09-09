@@ -74,7 +74,8 @@ namespace NewAPIConsume.Controllers
 
 			if (response.IsSuccessStatusCode)
 			{
-				return View("~/Views/SuccessView.cshtml");
+                ViewBag.Message = "Registration from Submited successfuly";
+                return View("~/Views/SuccessView.cshtml");
 			}
 			return View();
 
@@ -113,7 +114,7 @@ namespace NewAPIConsume.Controllers
 				if (response.IsSuccessStatusCode)
 				{
 					TempData["successmsg"] = "user updated"; 
-                    return RedirectToAction("Dashboard");
+                    return RedirectToAction("Login");
 				}
 
 			}

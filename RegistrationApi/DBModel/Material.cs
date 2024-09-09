@@ -8,8 +8,10 @@ namespace RegistrationApi.DBModel
     public class Material
     {
         [Key] 
-        public int? materialId { get; set; }    
-        
+        public int? materialId { get; set; }  
+
+        public int? userid { get; set; }
+
         public int? courseId { get; set; }
 
         public string? title { get; set; }
@@ -23,6 +25,9 @@ namespace RegistrationApi.DBModel
         public string? contentType { get; set; }
 
         public string? upload_file { get; set; }
+
+
+
 
     }
 }

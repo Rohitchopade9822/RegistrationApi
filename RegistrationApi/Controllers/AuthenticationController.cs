@@ -32,20 +32,34 @@ namespace RegistrationApi.Controllers
             IActionResult response = Unauthorized();
 
             var validateUser =  _userInfoContext.Users.FirstOrDefault(e => e.Password == user.Password);
-
+            var userId = validateUser.UserId;
+            if (userId != null)
+            {
+                return RedirectToAction("IdbyMaterial", "Materials", new { userId = userId });
+            }
             //var result = _passwordHasher.Verify(validateUser.Password, userModel.Password);
             if (validateUser==null)
             {
                 return BadRequest("Invalid username or password.");
             }
 
+            //if (validateUser != null)
+            //{
+            //    //var token = _authentication.GenerateToken(validateUser);
+            //    //return Ok(tokenstring = token);
+ //}
+           
             if (validateUser != null)
             {
+               
+                // Assuming UserId is the property for the user ID
+               
                 var token = _authentication.GenerateToken(validateUser);
-                return Ok(tokenstring = token);
+                return Ok (new { token });
             }
 
             return response;
+          
         }
     }
 }

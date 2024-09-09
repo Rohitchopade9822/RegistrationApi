@@ -5,11 +5,11 @@ namespace RegistrationApi.DBModel
     public class User
     {
             [Key]
-            public int UserId { get; set; }
+            public int? UserId { get; set; }
 
             
             [StringLength(90)]
-            public string Username { get; set; }
+            public string? Username { get; set; }
 
         
             [StringLength(90)]
@@ -17,7 +17,7 @@ namespace RegistrationApi.DBModel
 
             
             [StringLength(90)]
-            public string Role { get; set; }
+            public string? Role { get; set; }
 
             
             [EmailAddress]
@@ -27,7 +27,7 @@ namespace RegistrationApi.DBModel
             public string? MobileNumber { get; set; }
 
             [StringLength(900)]
-            public string ProfileImage { get; set; }
+            public string? ProfileImage { get; set; }
         
     }
 }

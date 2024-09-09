@@ -35,10 +35,10 @@ namespace RegistrationApi.Repository
             return maxMaterialId + 1;
         }
 
-        public Material GetMaterialById(int materialId)
+        public Material GetMaterialById(int userid)
         {
 
-            return _context.Materials.Find(materialId);
+            return _context.Materials.Find(userid);
 
         }
 
