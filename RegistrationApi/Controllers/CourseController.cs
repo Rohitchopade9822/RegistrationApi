@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Alachisoft.NCache.Common;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RegistrationApi.DBModel;
 using RegistrationApi.Repository;
@@ -11,17 +12,15 @@ namespace RegistrationApi.Controllers
 
     public class CourseController : ControllerBase
     {
-        private readonly ILogger<CourseController> _logger;
-        private readonly ICourse _courses;
 
-        public CourseController(ILogger<CourseController> logger, ICourse courses)
+        private readonly ICourse _courses;
+        public CourseController(ICourse course)
         {
-            _logger= logger;
-            _courses = courses;
+            _courses = course;
         }
 
         [HttpGet]
-        [Route("GetCourses")]
+     //   [Route("GetCourses")]
         public IActionResult GetCourses()
         {
             try
@@ -39,20 +38,40 @@ namespace RegistrationApi.Controllers
             }
            
         }
+     
+        [HttpGet("{userId}")]
+        //[Route("GetCoursesby_userid")]
+        public IActionResult GetCoursesby_userid(int userId)
+        {
+            try
+            {
+                var materialbyid = _courses.GetCourseByUserid(userId);
+                return Ok(materialbyid);
+
+
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+
+        }
         [HttpPost]
         [Route("AddCourses")]
         public IActionResult PostCourses(Course course)
         {
             try
             {
-                _logger.LogInformation("PostCourses method started");
+
                 _courses.addCourse(course);
-                _logger.LogInformation("PostCourses method completed");
+
+                _courses.SaveChanges();
                 return Ok("Add Successfuly");
             }
             catch(Exception ex)
             {
-                _logger.LogInformation("PostCourses method got Exception");
+              
                 return BadRequest(ex.Message);
             }
 
@@ -73,7 +92,7 @@ namespace RegistrationApi.Controllers
 
                 if (existingCourse == null)
                 {
-                    _logger.LogInformation("Method have Bad Request");
+                   
                     return NotFound("Course not found.");
                 }
 

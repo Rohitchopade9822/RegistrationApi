@@ -3,6 +3,7 @@ using NewAPIConsume.Models;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Text;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace NewAPIConsume.Controllers
 {
@@ -19,7 +20,7 @@ namespace NewAPIConsume.Controllers
         {
             return View();
         }
-        public IActionResult Loginuser(LoginViewModel login)
+        public IActionResult Loginuser(UserModel login)
         {
 
             var content = new StringContent(
@@ -27,7 +28,7 @@ namespace NewAPIConsume.Controllers
                 Encoding.UTF8,
                 "application/json");
 
-            // Send POST request to Web API login endpoint
+            // Send POST request to Web API login endpoint//ht
             using (var response = _httpClient.PostAsync("https://localhost:44368/api/Authentication/UserLogin", content).Result)
             {
 
@@ -43,6 +44,7 @@ namespace NewAPIConsume.Controllers
                     //  return View("~/Login/Index"); // Redirect to protected area
                 }
                 HttpContext.Session.SetString("token", token);
+
 
             }
 

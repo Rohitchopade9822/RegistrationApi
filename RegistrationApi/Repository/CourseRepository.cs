@@ -14,12 +14,17 @@ namespace RegistrationApi.Repository
         {
                 _context= myAppDbContext;
         }
-
-        public IEnumerable<Course> GetCourse()
+        public Course GetCourseByUserid(int userid)
         {
-            return _context.Courses.ToList();
+            return _context.Courses.Find(userid);
         }
 
+        
+        IEnumerable<Course> ICourse.GetCourseByUserid(int userId)
+        {
+
+            return _context.Courses.ToList();
+        }
         public void addCourse(Course course)
         {
             course.courseId = GetmaxId();
@@ -57,6 +62,11 @@ namespace RegistrationApi.Repository
         public Course GetCourseById(int id)
         {
             return _context.Courses.Find(id);
+        }
+
+        public IEnumerable<Course> GetCourse()
+        {
+            throw new NotImplementedException();
         }
     }
 }

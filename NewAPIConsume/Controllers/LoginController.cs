@@ -25,7 +25,7 @@ namespace NewAPIConsume.Controllers
             return View();
         }
 
-        public IActionResult Loginuser(LoginViewModel login)
+        public IActionResult Loginuser(UserModel login)
         {
 
             var content = new StringContent(

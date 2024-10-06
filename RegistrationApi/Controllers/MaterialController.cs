@@ -24,23 +24,35 @@ namespace RegistrationApi.Controllers
             [HttpGet]
             public IActionResult GetMaterials()
             {
-                try
+
+                var userId = HttpContext.Session.GetInt32("userId");
+
+                if (userId == null)
                 {
-                    var materials = _materialRepository.GetMaterials();
-                    return Ok(materials);
+                    return Unauthorized(); // Or handle the case where the user is not logged in
                 }
-                catch (Exception ex)
-                {
-                    return StatusCode(500, $"An error occurred while retrieving materials: {ex.Message}");
-                }
+
+                var materials =  _materialRepository.GetMaterialById(userId.Value);
+                return Ok(materials);
+
+                //try
+                //{
+                //    var materials = _materialRepository.GetMaterials();
+                //    return Ok(materials);
+                //}
+                //catch (Exception ex)
+                //{
+                //    return StatusCode(500, $"An error occurred while retrieving materials: {ex.Message}");
+                //}
             }
 
-             //[HttpGet]
+            [HttpGet]
             [HttpGet("{userId}")]
             public IActionResult IdbyMaterial( int userId)
             {
                 try
                 {
+                   
                     var materialbyid = _materialRepository.GetMaterialById(userId);
                     return Ok(materialbyid);
                 }

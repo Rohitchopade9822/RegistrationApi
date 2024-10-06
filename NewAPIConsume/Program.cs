@@ -1,4 +1,5 @@
 using Microsoft.CodeAnalysis.Options;
+using ProtoBuf.Extended.Meta;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +9,7 @@ builder.Services.AddSession(option => { option.IdleTimeout = TimeSpan.FromMinute
 
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
-
+builder.Services.AddSession();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

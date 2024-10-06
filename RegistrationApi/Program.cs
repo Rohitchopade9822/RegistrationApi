@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.DataProtection.Repositories;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using ProtoBuf.Extended.Meta;
 using RegistrationApi.Controllers.RegistrationApi.Controllers;
 using RegistrationApi.DBModel;
 using RegistrationApi.Repository;
@@ -56,6 +58,9 @@ builder.Services.AddScoped<IEnrollment, EnrollmentRepository>();
 builder.Services.AddScoped<IEnquiry, EnquiryRepository>();
 builder.Services.AddScoped<IFeedback,FeedbackRepository>();
 builder.Services.AddScoped<IUser , UserRepository>();
+builder.Services.AddDistributedMemoryCache(); 
+builder.Services.AddSession();
+
 
 
 var app = builder.Build();
@@ -70,7 +75,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseSession();
 app.MapControllers();
 
 app.Run();

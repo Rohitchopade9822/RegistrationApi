@@ -14,6 +14,8 @@ namespace RegistrationApi.Services
 
         Course GetCourseById(int id);
 
+        IEnumerable <Course> GetCourseByUserid(int userId);
+
         void SaveChanges();
 
 

@@ -12,14 +12,34 @@ namespace NewAPIConsume.Controllers
         Uri BaseAddress = new Uri("https://localhost:44368/api/");
 
         private HttpClient _httpClient;
-
+        
         public MaterialController()
         {
-            _httpClient = new HttpClient();
+            _httpClient = new HttpClient(); 
             _httpClient.BaseAddress = BaseAddress;
         }
         [HttpGet]
-        public async Task <IActionResult> Index(Material material)
+        
+        public async Task<IActionResult> Materialbyid(int userId)
+        {
+            List<Material> Materialbyid = new List<Material>();
+
+            HttpResponseMessage response = await _httpClient.GetAsync("https://localhost:44368/api/Materials/IdbyMaterial=" + userId);
+
+            //https://localhost:44368/api/Materials/IdbyMaterial/2
+
+            if (response.IsSuccessStatusCode)
+            {
+                var Data = response.Content.ReadAsStringAsync().Result;
+
+                Materialbyid = JsonConvert.DeserializeObject<List<Material>>(Data);
+            }
+            return View(Materialbyid);
+            
+
+        }
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
             List<Material> materials = new List<Material>();
 
@@ -37,6 +57,7 @@ namespace NewAPIConsume.Controllers
 
             return View(materials);
         }
+
         [HttpGet]
         public IActionResult Create()
         {

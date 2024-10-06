@@ -8,5 +8,7 @@ namespace RegistrationApi.DBModel
         public string? Username { get; set; }
 
         public string? Password { get; set; }
+
+       // public User? UserData { get; set; }
     }
 }
